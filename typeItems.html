@@ -158,7 +158,12 @@
 				location.href="productDetail.html?cid="+val.did;
 			});
 		});
-		
+		$("#newStyle li").on("click",function(){
+			typeItemDatas.forEach(function(val,index){
+				console.log(val.did);
+				location.href="productDetail.html?cid="+val.did;
+			});
+		});
 		
 </script>
 </html>
