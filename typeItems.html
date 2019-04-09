@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>分类页面</title>
+	<script src="../../jquery3.min.js"></script>
+	<script src="getData.js"></script>
+	<link rel="stylesheet" href="typeitems.css">
+</head>
+<body>
+	<div class="container">
+		<div class="nav">
+			<a href="" class="logo"><img src="https://gw.alicdn.com/tfs/TB1D1QUxjDpK1RjSZFrXXa78VXa-230-104.png" alt="">
+			</a>
+			<span class="location">
+				<img src="https://img.alicdn.com/tfs/TB1XHDuxNGYBuNjy0FnXXX5lpXa-28-32.png" alt="">
+				<span>全国</span>
+				<img src="https://img.alicdn.com/tfs/TB1vnUBxStYBeNjSspaXXaOOFXa-20-12.png" alt="">
+			</span>
+			<div class="shouYe">
+				<a href="index.html">首页</a>
+				<a style="margin-left: 10px;">分类</a>
+			</div>
+			<div class="nav_in">
+				<div><img src="https://img.alicdn.com/tfs/TB1qv3jxGmWBuNjy1XaXXXCbXXa-34-36.png" ></div>
+				<input type="text" placeholder="搜索明星、演出、体育赛事" id="keyword">
+				<div class="serach" onclick="getKeyword()">搜索</div>
+			</div>
+			<div class="login">
+				<img src="https://img.alicdn.com/tfs/TB14UKCGQyWBuNjy0FpXXassXXa-54-54.png" alt="">
+				<span>登录</span>
+				<img src="https://img.alicdn.com/tfs/TB1A9eIGKuSBuNjy1XcXXcYjFXa-54-54.png" alt="">
+				<span>下载</span>
+				<img src="https://img.alicdn.com/tfs/TB13UKCGQyWBuNjy0FpXXassXXa-54-54.png" alt="">
+				<span>English</span>
+			</div>
+		</div>
+		<div class="allCity">
+			<div class="city">
+				<span style="margin-left: 40px;width: 50px;">城市:</span>
+				<span style="margin-left: 2px;">全部</span>
+				<span>上海</span>
+				<span>北京</span>
+				<span>深圳</span>
+				<span>杭州</span>
+				<span>武汉</span>
+				<span>广州</span>
+				<span>成都</span>
+				<span>苏州</span>
+			</div>
+			<div class="type">
+				<span style="margin-left: 40px;width: 50px;">分类:</span>
+				<span style="margin-left: 0px;">全部</span>
+				<span id="concert">演唱会</span>
+				<span>歌剧话剧</span>
+				<span>音乐会</span>
+				<span>体育</span>
+				<span>曲苑杂坛</span>
+				<span>亲子</span>
+				<span>展览休闲</span>
+				<span>电影</span>
+			</div>
+			<div class="item">
+				<span style="margin-left: 40px;width: 50px;">子类:</span>
+				<span style="margin-left: 0px;">全部</span>
+				<span>其他</span>
+				<span>摇滚</span>
+				<span>民族</span>
+				<span>流行</span>
+				<span>音乐节</span>
+			</div>
+			<div class="time">
+				<span style="margin-left: 40px;width: 50px;">时间:</span>
+				<span style="margin-left: 0px;">全部</span>
+				<span>今天</span>
+				<span>明天</span>
+				<span>本周末</span>
+				<span>一个月内</span>
+				<span>按时间段：</span>
+			</div>
+		</div>
+
+		<div class="serach_sort">
+			<ul>
+				<li class="sort_li">相关排序</li>
+				<li class="sort_li">推荐排序</li>
+				<li class="sort_li">最近开场</li>
+				<li class="sort_li">最新上架</li>
+				<li style="width: 450px;">
+					<i id="one" ></i>
+					<i id="two"></i>
+				</li>
+				<li></li>
+			</ul>
+		</div>
+		<ul id="origin" style="border: 1px solid #e9e9e9;">
+			
+		</ul>
+		<ul id="newStyle" style="border: 1px solid #e9e9e9;">
+			
+		</ul>
+	</div>
+</body>
+<script>
+		//得到当前页面url
+		var urlString=location.href;
+		//得到点击的是那个具体类目id
+		var index=urlString.indexOf("?");
+		console.log(index);
+		var param=urlString.substring(index+1);
+		
+		var arr=param.split("=");
+		var id=decodeURI(arr[1]);
+		var name=arr[0];
+		console.log(id);
+		console.log(name);
+		//通过id得到该类目的数据
+		
+		if (name=="keyword") {
+			var typeItemDatas= getData("http://www.web520.xyz/web-projectAPI/index.php/index/search?keyword="+id);
+			console.log(typeItemDatas);
+		}else{
+			var typeItemDatas= getData("http://47.99.153.121:8021/index.php/index/details/typeId/"+id);
+			console.log(typeItemDatas);
+		
+		}
+		
+
+		//根据id，分类项目背景颜色发生改变
+		var i=parseInt(id)+1;
+		$(".type span").eq(i).css("background","blue");
+		//点击类目切换
+		
+		$(".type span").click(function(){
+			var index=$(this).index();
+			$("#origin>li").remove();
+			$("#newStyle>li").remove();
+
+			$(".type span").css("background","white")
+			$(".type span").eq(index).css("background","blue")
+			console.log(index);
+			var typeItemDatas= getData("http://47.99.153.121:8021/index.php/index/details/typeId/"+(index-1));
+			console.log(typeItemDatas);
+
+			//点击类目切换数据
+			ItemDatas(typeItemDatas);
+			//点击小图标切换样式
+			iclick();
+		});
+		//点击类目切换数据
+		ItemDatas(typeItemDatas);
+		//点击小图标切换样式
+		iclick();
+
+		$("#origin li").on("click",function(){
+			typeItemDatas.forEach(function(val,index){
+				console.log(val.did);
+				location.href="productDetail.html?cid="+val.did;
+			});
+		});
+		
+		
+</script>
+</html>

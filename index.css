@@ -1,0 +1,176 @@
+/* 导航栏 */
+*{margin: 0px;padding: 0px;}
+a{text-decoration: none;}
+
+.container{
+	width: 1200px;
+	position: absolute;
+	left: 50%;
+	margin-left: -600px;
+	font-size: 14px
+}
+.container .nav{
+	width: 100%;
+	height: 72px;
+	position: relative;
+}
+
+.container .nav  .logo{
+	display:inline-block;
+	position: absolute;
+	top: 10px;
+}
+.container .nav  .logo img{
+	height: 42px;
+	width: 92px;
+}
+.container .nav  .location{
+	position: absolute;
+	left: 150px;
+	top: 25px;
+	
+}
+.container .nav  .location img:first-of-type{
+	width: 12px;
+	height: 14px;
+	margin-left: 3px;
+}
+.container .nav  .location span{
+	margin-left: 3px;
+}
+.container .nav .location img:last-of-type{
+	width: 9px;
+	height: 5px;
+	margin-left:3px;
+	position: absolute;
+	left: 55px;
+	top: 8px;
+}
+.container .nav .shouYe{
+	position: absolute;
+	left: 250px;
+	top: 25px;
+}
+.container .nav .shouYe a{
+	color: black;
+}
+.container .nav .shouYe a:hover{
+	color: red;
+	cursor: pointer;
+}
+.container .nav .nav_in{
+	position: absolute;
+	right: 400px;
+	top: 13px;
+}
+.container .nav .nav_in div:first-of-type{
+	position: absolute;
+	width: 50px;
+	height:42px;
+	border-bottom-left-radius: 27px;
+	border-top-left-radius: 27px;
+	background: #f8f8f8;
+	left: -50px;
+}
+.container .nav .nav_in div img{
+	position: absolute;
+	width: 17px;
+	height: 18px;
+	left: 20px;
+	top: 12px;
+}
+.container .nav .nav_in input{
+	width: 300px;
+	height: 42px;
+	border: 0;
+	background: #f8f8f8;
+	outline: none;
+	font-size: 16px;
+	z-index: 10;
+}
+.container .nav .nav_in .serach{
+	position: absolute;
+	width: 82px;
+	height: 42px;
+	background:#FF1268; 
+	left: 300px;
+	top: 0px;
+	border-top-right-radius: 27px;
+	border-bottom-right-radius: 27px;
+	text-align: center;
+	line-height: 42px;
+	color: #fff;
+}
+.container .nav .login{
+	position: absolute;
+	left: 900px;
+	top: 20px;
+}
+.container .nav .login img{
+	width: 26px;
+	height: 26px;
+	padding-left: 40px;
+}
+.container .nav .login span{
+	display: inline-block;
+	position: absolute;
+	top: 3px;
+}
+.container .nav .login span:last-of-type{
+	right: -50px;
+}
+/*<!-- 分类 -->*/
+.container .fenlei{
+	height: 120px;
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid #e9e9e9;
+	margin-top: 10px;
+}
+.container .fenlei .item{
+	width: 120px;
+	height: 69px;
+	margin-top: 25px;
+	cursor: pointer;
+}
+.container .fenlei .item:hover{
+	color: red;
+}
+.container .fenlei .item i{
+	display:block;
+	width: 48px;
+	height: 48px;
+	margin: 0 auto;
+	overflow: hidden;
+	position: relative;
+}
+.container .fenlei .item i img{
+	width: 48px;
+	position: absolute;
+}
+.container .fenlei .icon2 i img{
+	top: -65px;
+}
+.container .fenlei .icon3 i img{
+	top: -122px;
+}
+
+.container .fenlei .icon4 i img{
+	top: -180px;
+}
+
+.container .fenlei .icon5 i img{
+	top: -235px;
+}
+
+.container .fenlei .icon6 i img{
+	top: -295px;
+}
+
+.container .fenlei .icon7 i img{
+	top: -355px;
+}
+.container .fenlei .icon8 i img{
+	top: -415px;
+}
+

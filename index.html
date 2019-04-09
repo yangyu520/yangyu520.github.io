@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>主页面</title>
+	<script src="../../jquery3.min.js"></script>
+	<link rel="stylesheet" href="index.css">
+	<script src="dist/js/swiper.min.js"></script>
+	<link rel="stylesheet" href="index1.css">
+	<script src="shuffling.js"></script>
+	<script src="getData.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="nav">
+				<a href="" class="logo"><img src="https://gw.alicdn.com/tfs/TB1D1QUxjDpK1RjSZFrXXa78VXa-230-104.png" alt="">
+			</a>
+			<span class="location">
+				<img src="https://img.alicdn.com/tfs/TB1XHDuxNGYBuNjy0FnXXX5lpXa-28-32.png" alt="">
+				<span>全国</span>
+				<img src="https://img.alicdn.com/tfs/TB1vnUBxStYBeNjSspaXXaOOFXa-20-12.png" alt="">
+			</span>
+			<div class="shouYe">
+				<a href="javascript:void(0)" style="color: red;">首页</a>
+				<a style="margin-left: 10px;">分类</a>
+			</div>
+			<div class="nav_in">
+				<div><img src="https://img.alicdn.com/tfs/TB1qv3jxGmWBuNjy1XaXXXCbXXa-34-36.png" ></div>
+				<input type="text" placeholder="搜索明星、演出、体育赛事" id="keyword">
+				<div class="serach" onclick="getKeyword()">搜索</div>
+			</div>
+			<div class="login">
+				<img src="https://img.alicdn.com/tfs/TB14UKCGQyWBuNjy0FpXXassXXa-54-54.png" alt="">
+				<span>登录</span>
+				<img src="https://img.alicdn.com/tfs/TB1A9eIGKuSBuNjy1XcXXcYjFXa-54-54.png" alt="">
+				<span>下载</span>
+				<img src="https://img.alicdn.com/tfs/TB13UKCGQyWBuNjy0FpXXassXXa-54-54.png" alt="">
+				<span>English</span>
+			</div>
+		</div>
+		<!-- 轮播图 -->
+	<div id="container">
+		<div id="list" style="left:-1200px">
+			<img src="images/04.jpg" alt="4">
+			<img src="images/01.jpg" alt="1">
+			<img src="images/02.jpg" alt="2">
+			<img src="images/03.jpg" alt="3">
+			<img src="images/04.jpg" alt="4">
+			<img src="images/01.jpg" alt="1">
+		</div>
+		<div id="buttons">
+			<span class="on" index="1"></span>
+			<span index="2"></span>
+			<span index="3"></span>
+			<span index="4"></span>
+		</div>
+		<a href="#" id="prev" class="arrow">&lt;</a>
+		<a href="#" id="next" class="arrow">&gt;</a>
+	</div>	
+	<!-- 分类 -->
+	<div class="fenlei">
+		<div class="item icon1">
+            <i><img src="images/fenlei.png" alt=""></i>
+		</div>
+		<div class="item icon2">
+			<i><img src="images/fenlei.png" alt=""></i>
+		</div>
+		<div class="item icon3">
+			<i><img src="images/fenlei.png" alt=""></i>
+		</div>
+		<div class="item icon4">
+			<i><img src="images/fenlei.png" alt=""></i>
+		</div>
+		<div class="item icon5">
+			<i><img src="images/fenlei.png" alt=""></i>
+		</div>
+		<div class="item icon6">
+			<i><img src="images/fenlei.png" alt=""></i>
+		</div>
+		<div class="item icon7">
+			<i><img src="images/fenlei.png" alt=""></i>
+		</div>
+		<div class="item icon8">
+			<i><img src="images/fenlei.png" alt=""></i>
+		</div>
+	</div>
+	<table style="font-size: 14px;border: 1px solid #e9e9e9;">
+		
+	</table>
+</div>			
+</body>
+<script>
+//分类导航跳转
+	var datas=getData("http://47.99.153.121:8021/index.php/index/types");
+	console.log(datas);
+	datas.forEach(function(val,index){
+		var div=`<p style="text-align:center">${val.cname}</p>`
+		$(".icon"+(index+1)).append(div)
+		$(".icon"+(index+1)).click(function(){
+			//通过cid确定跳转到那个分类页
+			location.href="typeItems.html?cid="+val.cid;
+		});
+	})
+	//添加分类介绍
+	for (var i = 0; i < 3; i++) {
+		var tr=`<tr style="height:50px;"><td>${datas[i].cname}<span id="turn" style="margin-left:1000px;display:inline-block;">查看更多</span></td></tr>`
+		$("table").append(tr);
+		//取到分类的数据
+		var typeItemDatas= getData("http://47.99.153.121:8021/index.php/index/details/typeId/"+(i+1));
+		//添加第一张照片，并把第一张照片绑定点击事件
+		var tr=`<tr style="float:left"><td style="width:273px;height:160px" ><img style="width:270px;height:360px;cursor:pointer;" src="${typeItemDatas[0].poster}" onclick="getType(${typeItemDatas[0].did})" /></td></tr>`
+		$("table").append(tr)
+		for (var j = 1; j < 7; j++) {
+			//添加剩下6张照片，并绑定点击事件
+			tr=
+			`<tr style="float:left;margin-top:-27px;">
+				<td style="width:273px;height:222px;position:relative;" ><img style="width:118px;height:160px;cursor:pointer;" src="${typeItemDatas[j].poster}" onclick="getType(${typeItemDatas[j].did})" />
+				<span style="position:absolute;left:125px;font-size: 13px">${typeItemDatas[j].title.substring(0,20)}······</span>
+				<span style="position:absolute;left:125px;top:70px;font-size: 12px">${typeItemDatas[j].address}</span>
+				<span style="position:absolute;left:125px;top:90px;font-size: 12px">${typeItemDatas[j].releasetime.toString().substring(0,10)}</span>
+				<span style="color:red;">${typeItemDatas[j].price.toString().substring(0,4).replace("-","")}起</span>
+				</td>
+			</tr>`
+			$("table").append(tr);
+		}
+		function getType(did){
+			//通过did确定跳转到商品详情页
+		  	location.href="productDetail.html?cid="+did;
+		  }
+	}
+	
+
+</script>
+</html>
